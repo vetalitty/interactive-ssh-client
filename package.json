@@ -1,0 +1,9 @@
+{
+  "name": "ssh",
+  "version": "0.0.1",
+  "dependencies": {
+    "keypress": "^0.2.1",
+    "ssh2": "latest",
+    "ssh2-client": "^1.2.1"
+  }
+}
