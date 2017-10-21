@@ -62,9 +62,46 @@ class SSHtool {
     }
 
     async init() {
+        this._displayStartText();
+        this._overrideButtons();
         await this.connect();
         // todo: selectMode - default shell, get, pull
         this.shell();
+    }
+
+    _selectMode() {
+        if (process.argv.length <= 2) {
+            return this.shell();
+        }
+        if (process.argv.length >= 3 && process.argv.length <= 4) {
+            const method = process.argv[2];
+            const params = process.argv[3];
+            switch (method) {
+                case 'get':
+                    break;
+                case 'put':
+                    break;
+                default:
+                    throw new Error('Unsupported command.');
+            }
+        }
+    }
+
+    _displayStartText() {
+        process.stdout.write('Node JS SSH tool has been started\n');
+        process.stdout.write('---------------------------------\n');
+    }
+
+    _overrideButtons() {
+        const ctrl_Q = '\u0011';
+        process.stdin.setRawMode(true);
+        process.stdin.resume();
+        process.stdin.setEncoding('utf8');
+        process.stdin
+            .on('data', (key) => {
+                if (key === ctrl_Q) process.exit();
+                if (this.keyCodeStream) this.keyCodeStream.write('' + key);
+            });
     }
 }
 
