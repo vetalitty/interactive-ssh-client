@@ -2,6 +2,6 @@
   "name": "ssh",
   "version": "0.0.1",
   "dependencies": {
-    "ssh2": "latest"
+    "ssh2": "latest",
   }
 }
